@@ -11,6 +11,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "ngx-angular-material-hijri-adapter": [
+        "dist/ngx-angular-material-hijri-adapter/ngx-angular-material-hijri-adapter",
+        "dist/ngx-angular-material-hijri-adapter"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
