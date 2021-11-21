@@ -1,9 +1,16 @@
 {
   "name": "ngx-angular-material-hijri-adapter",
   "version": "0.0.1",
+  "author": {
+    "name": "Ebrahiem Gamal Mohammed",
+    "email": "e.g.mhmd2020@gmail.com"
+  },
   "peerDependencies": {
     "@angular/common": "^13.0.0",
-    "@angular/core": "^13.0.0"
+    "@angular/core": "^13.0.0",
+    "@angular/material": "^13.0.2",
+    "moment-hijri": "^2.1.2",
+    "@types/moment-hijri": "^2.1.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
