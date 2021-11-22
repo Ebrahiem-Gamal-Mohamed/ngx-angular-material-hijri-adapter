@@ -34,7 +34,9 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
 
     this._localeData = {
       firstDayOfWeek:
-        locale === DateLocaleKeys.AR_SA ? momentLocaleData?.firstDayOfWeek() : 6, // make Saturday is the first hijri day in 'ar' locale...
+        locale === DateLocaleKeys.AR_SA
+          ? momentLocaleData?.firstDayOfWeek()
+          : 6, // make Saturday is the first hijri day in 'ar' locale...
       longMonths: momentLocaleData?.months().slice(0),
       shortMonths: momentLocaleData?.monthsShort().slice(0),
       dates: range(30, (i) => this.createDate(1443, 2, i + 1).format('iD')), // set to 30 days month within any hijri year to get 30 formatted days.
@@ -176,19 +178,35 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
     return momentHijri(date, format, locale);
   }
   private _updateMomentLocales() {
-    // Note: We used 'ar-sa' here to override the initial moment hijri locale...
-    momentHijri?.updateLocale(DateLocaleKeys.AR_SA, {
-      months:
-        'محرم_صفر_ربيع الأول_ربيع الثاني_جمادى الأولى_جمادى الآخرة_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split(
-          '_'
-        ),
-      monthsShort:
-        'محرم_صفر_ربيع ١_ربيع ٢_جمادى ١_جمادى ٢_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split(
-          '_'
-        ),
-    });
-    // Note: Don't use 'en' to prevent override the initial Date Adapter...
-    momentHijri?.updateLocale(DateLocaleKeys.EN_US, {
+    const iMonthNamesEn = {
+      iMonths: [
+        'Muharram',
+        'Safar',
+        "Rabi' al-Awwal",
+        "Rabi' al-Thani",
+        'Jumada al-Ula',
+        'Jumada al-Alkhirah',
+        'Rajab',
+        'Sha’ban',
+        'Ramadhan',
+        'Shawwal',
+        'Thul-Qi’dah',
+        'Thul-Hijjah',
+      ],
+      iMonthsShort: [
+        'Muh',
+        'Saf',
+        'Rab-I',
+        'Rab-II',
+        'Jum-I',
+        'Jum-II',
+        'Raj',
+        'Sha',
+        'Ram',
+        'Shw',
+        'Dhu-Q',
+        'Dhu-H',
+      ],
       months: [
         'Muharram',
         'Safar',
@@ -217,6 +235,41 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
         'Dhu-Q',
         'Dhu-H',
       ],
-    });
+    };
+
+    const iMonthNamesAr = {
+      iMonths:
+        'محرم_صفر_ربيع الأول_ربيع الثاني_جمادى الأولى_جمادى الآخرة_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split(
+          '_'
+        ),
+      iMonthsShort:
+        'محرم_صفر_ربيع ١_ربيع ٢_جمادى ١_جمادى ٢_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split(
+          '_'
+        ),
+      months:
+        'محرم_صفر_ربيع الأول_ربيع الثاني_جمادى الأولى_جمادى الآخرة_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split(
+          '_'
+        ),
+      monthsShort:
+        'محرم_صفر_ربيع ١_ربيع ٢_جمادى ١_جمادى ٢_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split(
+          '_'
+        ),
+    };
+
+    // Default to the momentjs 2.12+ API
+    if (typeof momentHijri?.updateLocale === 'function') {
+      // Note: We used 'ar-sa' here to override the initial moment hijri locale...
+      momentHijri?.updateLocale(DateLocaleKeys.AR_SA, {
+        ...iMonthNamesAr,
+      });
+      // Note: Don't use 'en' to prevent override the initial Date Adapter...
+      momentHijri?.updateLocale(DateLocaleKeys.EN_US, {
+        ...iMonthNamesEn
+      });
+    } else {
+      const oldLocale = momentHijri?.locale();
+      momentHijri?.defineLocale(DateLocaleKeys.AR_SA, iMonthNamesEn);
+      momentHijri?.locale(oldLocale);
+    }
   }
 }
