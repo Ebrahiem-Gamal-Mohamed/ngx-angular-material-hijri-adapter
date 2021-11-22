@@ -3,11 +3,14 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { DateLocaleKeys } from './entities/moment-hijri-date-locale-keys.enum';
 import { ILocalData } from './entities/moment-hijri-local-data.interface';
-
-import { Moment, MomentInput, MomentFormatSpecification } from 'moment-hijri';
 import * as _moment from 'moment-hijri';
+// Since moment-hijri library doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+// @ts-ignore:no-duplicate-imports
+import { default as _rollupMoment, Moment, MomentInput, MomentFormatSpecification } from 'moment-hijri';
 
-const momentHijri = _moment;
+const momentHijri = _rollupMoment || _moment;
 
 /** Creates an array and fills it with values. */
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
@@ -179,62 +182,22 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
   }
   private _updateMomentLocales() {
     const iMonthNamesEn = {
-      iMonths: [
-        'Muharram',
-        'Safar',
-        "Rabi' al-Awwal",
-        "Rabi' al-Thani",
-        'Jumada al-Ula',
-        'Jumada al-Alkhirah',
-        'Rajab',
-        'Sha’ban',
-        'Ramadhan',
-        'Shawwal',
-        'Thul-Qi’dah',
-        'Thul-Hijjah',
-      ],
-      iMonthsShort: [
-        'Muh',
-        'Saf',
-        'Rab-I',
-        'Rab-II',
-        'Jum-I',
-        'Jum-II',
-        'Raj',
-        'Sha',
-        'Ram',
-        'Shw',
-        'Dhu-Q',
-        'Dhu-H',
-      ],
-      months: [
-        'Muharram',
-        'Safar',
-        "Rabi' al-Awwal",
-        "Rabi' al-Thani",
-        'Jumada al-Ula',
-        'Jumada al-Alkhirah',
-        'Rajab',
-        'Sha’ban',
-        'Ramadhan',
-        'Shawwal',
-        'Thul-Qi’dah',
-        'Thul-Hijjah',
-      ],
-      monthsShort: [
-        'Muh',
-        'Saf',
-        'Rab-I',
-        'Rab-II',
-        'Jum-I',
-        'Jum-II',
-        'Raj',
-        'Sha',
-        'Ram',
-        'Shw',
-        'Dhu-Q',
-        'Dhu-H',
-      ],
+      iMonths:
+        `Muharram_Safar_Rabi' al-Awwal_Rabi' al-Thani_Jumada al-Ula_Jumada al-Alkhirah_Rajab_Sha’ban_Ramadhan_Shawwal_Thul-Qi’dah_Thul-Hijjah`.split(
+          '_'
+        ),
+      iMonthsShort:
+        `Muh_Saf_Rab-I_Rab-II_Jum-I_Jum-II_Raj_Sha_Ram_Shw_Dhu-Q_Dhu-H`.split(
+          '_'
+        ),
+      months:
+        `Muharram_Safar_Rabi' al-Awwal_Rabi' al-Thani_Jumada al-Ula_Jumada al-Alkhirah_Rajab_Sha’ban_Ramadhan_Shawwal_Thul-Qi’dah_Thul-Hijjah`.split(
+          '_'
+        ),
+      monthsShort:
+        `Muh_Saf_Rab-I_Rab-II_Jum-I_Jum-II_Raj_Sha_Ram_Shw_Dhu-Q_Dhu-H`.split(
+          '_'
+        ),
     };
 
     const iMonthNamesAr = {
@@ -264,7 +227,7 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
       });
       // Note: Don't use 'en' to prevent override the initial Date Adapter...
       momentHijri?.updateLocale(DateLocaleKeys.EN_US, {
-        ...iMonthNamesEn
+        ...iMonthNamesEn,
       });
     } else {
       const oldLocale = momentHijri?.locale();
