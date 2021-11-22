@@ -1,6 +1,6 @@
 {
   "name": "ngx-angular-material-hijri-adapter",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "This library is an Angular material date adapter for Hijri Calendar Dates and Dates/Time depending on moment-hijri plugin and @angular/material.",
   "keywords": [
     "Angular",

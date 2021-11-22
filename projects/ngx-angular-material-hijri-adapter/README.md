@@ -5,20 +5,42 @@ it's depending on moment-hijri (v2.1.2) plugin and @angular/material (v13.0.2).
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.0.
 
-To use the library you must import { NgxAngularMaterialHijriAdapterModule } module into your root Module -App or Core module- and must be before { MatMomentDateModule } if it was exist. 
 
-## Code scaffolding
+## Installation
 
-Run `ng generate component component-name --project ngx-angular-material-hijri-adapter` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-angular-material-hijri-adapter`.
-> Note: Don't forget to add `--project ngx-angular-material-hijri-adapter` or else it will be added to the default project in your `angular.json` file. 
+To use the library you must run `npm install ngx-angular-material-hijri-adapter`.
 
-## Build
+> Note: Please remember to install the `@angular/material` and `moment-hijri` libraries if not exist in your package.json.
 
-Run `ng build ngx-angular-material-hijri-adapter` to build the project. The build artifacts will be stored in the `dist/` directory.
+### @angular/material 
+```
+You can run: ng add @angular/material
 
-## Publishing
+or simply run: npm install @angular/material
 
-After building your library with `ng build ngx-angular-material-hijri-adapter`, go to the dist folder `cd dist/ngx-angular-material-hijri-adapter` and run `npm publish`.
+or visit: [Angular Material official website](https://material.angular.io/)
+```
+### moment-hijri
+```
+You can run: npm install moment-hijri
+
+or visit: [Moment Hijri Library](https://github.com/xsoh/moment-hijri)
+```
+
+## After installation
+
+```
+import { NgxAngularMaterialHijriAdapterModule } from 'ngx-angular-material-hijri-adapter';
+
+@NgModule({
+  imports: [
+    NgxAngularMaterialHijriAdapterModule
+  ],
+})
+export class AppModule {}
+```
+
+> Note:  import `NgxAngularMaterialHijriAdapterModule` module into your root Module -App or Core module- and must be before `MatMomentDateModule` if it existed.
 
 ## Running unit tests
 
