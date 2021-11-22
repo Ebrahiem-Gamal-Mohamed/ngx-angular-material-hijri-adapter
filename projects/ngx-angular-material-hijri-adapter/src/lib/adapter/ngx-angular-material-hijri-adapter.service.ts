@@ -30,17 +30,17 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
 
   override setLocale(locale: string) {
     super.setLocale(locale);
-    const momentLocaleData = momentHijri.localeData(locale);
+    const momentLocaleData = momentHijri?.localeData(locale);
 
     this._localeData = {
       firstDayOfWeek:
-        locale === DateLocaleKeys.AR_SA ? momentLocaleData.firstDayOfWeek() : 6, // make Saturday is the first hijri day in 'ar' locale...
-      longMonths: momentLocaleData.months().slice(0),
-      shortMonths: momentLocaleData.monthsShort().slice(0),
+        locale === DateLocaleKeys.AR_SA ? momentLocaleData?.firstDayOfWeek() : 6, // make Saturday is the first hijri day in 'ar' locale...
+      longMonths: momentLocaleData?.months().slice(0),
+      shortMonths: momentLocaleData?.monthsShort().slice(0),
       dates: range(30, (i) => this.createDate(1443, 2, i + 1).format('iD')), // set to 30 days month within any hijri year to get 30 formatted days.
-      longDaysOfWeek: momentLocaleData.weekdays().slice(0),
-      shortDaysOfWeek: momentLocaleData.weekdaysShort().slice(0),
-      narrowDaysOfWeek: momentLocaleData.weekdaysMin().slice(0),
+      longDaysOfWeek: momentLocaleData?.weekdays().slice(0),
+      shortDaysOfWeek: momentLocaleData?.weekdaysShort().slice(0),
+      narrowDaysOfWeek: momentLocaleData?.weekdaysMin().slice(0),
     };
   }
   getYear(date: Moment): number {
@@ -74,13 +74,13 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
     }
   }
   getYearName(date: Moment): string {
-    return this.clone(date).format('iYYYY');
+    return this.clone(date)?.format('iYYYY');
   }
   getFirstDayOfWeek(): number {
     return this._localeData?.firstDayOfWeek;
   }
   getNumDaysInMonth(date: Moment): number {
-    return momentHijri.iDaysInMonth(this.getYear(date), this.getMonth(date)); // get the current month days number of current hijri (year and month).
+    return momentHijri?.iDaysInMonth(this.getYear(date), this.getMonth(date)); // get the current month days number of current hijri (year and month).
   }
   clone(date: Moment): Moment {
     return date?.clone().locale(this.locale);
@@ -119,14 +119,14 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
     if (value && typeof value === 'string') {
       return this._createMoment(value, parseFormat, this.locale);
     }
-    return value ? this._createMoment(value).locale(this.locale) : null;
+    return value ? this._createMoment(value)?.locale(this.locale) : null;
   }
   format(date: Moment, displayFormat: string): string {
     date = this.clone(date);
     if (!this.isValid(date)) {
       throw Error('MomentHijriDateAdapter: Cannot format invalid date.');
     }
-    return date.format(displayFormat);
+    return date?.format(displayFormat);
   }
   addCalendarYears(date: Moment, years: number): Moment {
     return this.clone(date)?.add(years, 'iYear');
@@ -159,13 +159,13 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
     return super.deserialize(value);
   }
   isDateInstance(obj: any): boolean {
-    return momentHijri.isMoment(obj);
+    return momentHijri?.isMoment(obj);
   }
   isValid(date: Moment): boolean {
     return this.clone(date)?.isValid();
   }
   invalid(): Moment {
-    return momentHijri.invalid();
+    return momentHijri?.invalid();
   }
 
   private _createMoment(
@@ -177,7 +177,7 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
   }
   private _updateMomentLocales() {
     // Note: We used 'ar-sa' here to override the initial moment hijri locale...
-    momentHijri.updateLocale(DateLocaleKeys.AR_SA, {
+    momentHijri?.updateLocale(DateLocaleKeys.AR_SA, {
       months:
         'محرم_صفر_ربيع الأول_ربيع الثاني_جمادى الأولى_جمادى الآخرة_رجب_شعبان_رمضان_شوال_ذو القعدة_ذو الحجة'.split(
           '_'
@@ -188,7 +188,7 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
         ),
     });
     // Note: Don't use 'en' to prevent override the initial Date Adapter...
-    momentHijri.updateLocale(DateLocaleKeys.EN_US, {
+    momentHijri?.updateLocale(DateLocaleKeys.EN_US, {
       months: [
         'Muharram',
         'Safar',
