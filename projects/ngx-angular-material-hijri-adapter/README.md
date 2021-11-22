@@ -1,6 +1,11 @@
 # NgxAngularMaterialHijriAdapter
 
+This library is an Angular material date adapter for Hijri Calendar Dates and Dates/Time, 
+it's depending on moment-hijri (v2.1.2) plugin and @angular/material (v13.0.2).
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.0.
+
+To use the library you must import { NgxAngularMaterialHijriAdapterModule } module into your root Module -App or Core module- and must be before { MatMomentDateModule } if it was exist. 
 
 ## Code scaffolding
 
