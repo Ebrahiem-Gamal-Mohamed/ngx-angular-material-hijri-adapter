@@ -7,10 +7,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "copy_license": "copy .\\LICENSE .\\dist\\ngx-angular-material-hijri-adapter",
     "build_lib": "ng build --configuration production ngx-angular-material-hijri-adapter",
     "npm_pack": "cd dist/ngx-angular-material-hijri-adapter && npm pack",
-    "package": "npm run build_lib && npm run copy_license && npm run npm_pack"
+    "package": "npm run build_lib && npm run npm_pack"
   },
   "private": true,
   "dependencies": {
