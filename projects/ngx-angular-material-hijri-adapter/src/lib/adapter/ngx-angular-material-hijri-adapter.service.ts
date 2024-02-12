@@ -183,7 +183,7 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
   private _updateMomentLocales() {
     const iMonthNamesEn = {
       iMonths:
-        `Muharram_Safar_Rabi' al-Awwal_Rabi' al-Thani_Jumada al-Ula_Jumada al-Alkhirah_Rajab_Sha’ban_Ramadhan_Shawwal_Thul-Qi’dah_Thul-Hijjah`.split(
+        `Muharram_Safar_Rabi’ al-Awwal_Rabi’ al-Thani_Jumada al-Ula_Jumada al-Alkhirah_Rajab_Sha’ban_Ramadhan_Shawwal_Thul-Qi’dah_Thul-Hijjah`.split(
           '_'
         ),
       iMonthsShort:
@@ -191,7 +191,7 @@ export class NgxAngularMaterialHijriAdapterService extends DateAdapter<Moment> {
           '_'
         ),
       months:
-        `Muharram_Safar_Rabi' al-Awwal_Rabi' al-Thani_Jumada al-Ula_Jumada al-Alkhirah_Rajab_Sha’ban_Ramadhan_Shawwal_Thul-Qi’dah_Thul-Hijjah`.split(
+        `Muharram_Safar_Rabi’ al-Awwal_Rabi’ al-Thani_Jumada al-Ula_Jumada al-Alkhirah_Rajab_Sha’ban_Ramadhan_Shawwal_Thul-Qi’dah_Thul-Hijjah`.split(
           '_'
         ),
       monthsShort:
